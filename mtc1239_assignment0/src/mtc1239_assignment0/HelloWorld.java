@@ -11,7 +11,7 @@ public class HelloWorld implements HelloWorld_Interface {
 
 	@Override
 	public String say_it() {
-		return "hello world";
+		return "Hello World";
 	}
 
 	@Override
