@@ -1,10 +1,14 @@
 package mtc1239_assignment1;
 
+import org.omg.CORBA.Current;
+
 public class LinkedListImpl implements LIST_Interface {
 	Node sentinel; // this will be the entry point to your linked list (the head)
-	
+
 	public LinkedListImpl() {// this constructor is needed for testing purposes. Please don't modify!
-		sentinel = new Node(0); // Note that the root's data is not a true part of your data set!
+		sentinel = new Node(0); 
+		sentinel.next = sentinel;
+		sentinel.prev = sentinel;// Note that the root's data is not a true part of your data set!
 	}
 
 	// implement all methods in interface, and include the getRoot method we made
@@ -17,44 +21,67 @@ public class LinkedListImpl implements LIST_Interface {
 	@Override
 	public boolean insert(double elt, int index) {
 		Node temp = new Node(elt);
-		if(index < 0 || index > this.size()) {
+		if (index < 0 || index > size()) {
 			return false;
-		} else if (this.size() == 0) {
-			sentinel.next = temp;
-			sentinel.prev = temp;
-			
-			return true;
 		} else {
-			
-			
-			return true;
+			Node current = sentinel;
+
+			for (int i = 0; i < index; i++) {
+				current = current.next;
+			}
+			if (current.next != null) {
+				Node next = current.next;
+				current.next.prev = temp;
+				current.next = temp;
+				temp.next = next;
+				temp.prev = current;
+				return true;
+			}
+			return false;
 		}
-		
-		
+
 	}
 
 	@Override
 	public boolean remove(int index) {
-		
+		if (index > size() - 1) {
+			return false;
+		} else {
+			Node current = sentinel;
+			for (int i = 0; i < index; i++) {
+				current = current.next;
+			}
+			current.next = current.next.next;
+			return true;
+		}
 	}
 
 	@Override
 	public double get(int index) {
-		// TODO Auto-generated method stub
-		return 0;
+		if (index > size() - 1) {
+			return Double.NaN;
+		} else {
+			Node current = sentinel;
+			for (int i = -1; i < index; i++) {
+				current = current.next;
+			}
+			return current.data;
+		}
 	}
 
 	@Override
 	public int size() {
 		int size = 0;
-		
-		if(sentinel.next == sentinel) {
+
+		if (sentinel.next == sentinel) {
 			return size;
 		} else {
 			Node current = sentinel;
-			while(current.next != sentinel) {
-				current = current.next;
-				size++;
+			if (current.next != null) {
+				while (current.next != sentinel) {
+					current = current.next;
+					size++;
+				}
 			}
 			return size;
 		}
@@ -62,17 +89,16 @@ public class LinkedListImpl implements LIST_Interface {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+		if (size() == 0) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
+		sentinel.next = sentinel;
+		sentinel.prev = sentinel;
+	}
 
-	}
-	
-	public Node retrieve(int index) {
-		
-	}
 }

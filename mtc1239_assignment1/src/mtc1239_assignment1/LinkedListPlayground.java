@@ -9,7 +9,7 @@ public class LinkedListPlayground {
 		 * debugging. It doesn't matter what you have in here. We will not grade it.
 		 * This is for your use in testing your implementation.
 		 */
-		test1();
+//		test1();
 		test2();
 
 	}
