@@ -1,4 +1,4 @@
-package mtc1239_assignment1;
+package LinkedList_A1;
 
 public interface LIST_Interface {
 	

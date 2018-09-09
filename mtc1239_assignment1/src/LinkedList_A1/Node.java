@@ -1,4 +1,4 @@
-package mtc1239_assignment1;
+package LinkedList_A1;
 
 public class Node { // this is your Node object, these are the Objects in your list
 	public double data;

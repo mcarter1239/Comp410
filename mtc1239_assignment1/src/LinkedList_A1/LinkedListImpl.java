@@ -1,4 +1,4 @@
-package mtc1239_assignment1;
+package LinkedList_A1;
 
 import org.omg.CORBA.Current;
 
@@ -6,9 +6,8 @@ public class LinkedListImpl implements LIST_Interface {
 	Node sentinel; // this will be the entry point to your linked list (the head)
 
 	public LinkedListImpl() {// this constructor is needed for testing purposes. Please don't modify!
-		sentinel = new Node(0); 
-		sentinel.next = sentinel;
-		sentinel.prev = sentinel;// Note that the root's data is not a true part of your data set!
+		sentinel = new Node(0);
+		// Note that the root's data is not a true part of your data set!
 	}
 
 	// implement all methods in interface, and include the getRoot method we made
@@ -36,8 +35,13 @@ public class LinkedListImpl implements LIST_Interface {
 				temp.next = next;
 				temp.prev = current;
 				return true;
+			} else {
+				sentinel.next = temp;
+				sentinel.prev = temp;
+				temp.next = sentinel;
+				temp.prev = sentinel;
+				return true;
 			}
-			return false;
 		}
 
 	}
@@ -51,6 +55,7 @@ public class LinkedListImpl implements LIST_Interface {
 			for (int i = 0; i < index; i++) {
 				current = current.next;
 			}
+			current.next.next.prev = current;
 			current.next = current.next.next;
 			return true;
 		}
@@ -72,16 +77,13 @@ public class LinkedListImpl implements LIST_Interface {
 	@Override
 	public int size() {
 		int size = 0;
-
-		if (sentinel.next == sentinel) {
+		Node current = sentinel;
+		if (current.next == null) {
 			return size;
 		} else {
-			Node current = sentinel;
-			if (current.next != null) {
-				while (current.next != sentinel) {
-					current = current.next;
-					size++;
-				}
+			while (current.next != sentinel) {
+				current = current.next;
+				size++;
 			}
 			return size;
 		}
@@ -97,8 +99,8 @@ public class LinkedListImpl implements LIST_Interface {
 
 	@Override
 	public void clear() {
-		sentinel.next = sentinel;
-		sentinel.prev = sentinel;
+		sentinel.next = null;
+		sentinel.prev = null;
 	}
 
 }

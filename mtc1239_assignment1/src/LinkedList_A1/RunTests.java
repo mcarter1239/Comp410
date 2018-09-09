@@ -1,4 +1,4 @@
-package mtc1239_assignment1;
+package LinkedList_A1;
 
 import gradingTools.comp410s18.assignment1.testcases.Assignment1Suite;
 

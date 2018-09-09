@@ -1,4 +1,4 @@
-package mtc1239_assignment1;
+package LinkedList_A1;
 
 public class LinkedListPlayground {
 
@@ -9,9 +9,9 @@ public class LinkedListPlayground {
 		 * debugging. It doesn't matter what you have in here. We will not grade it.
 		 * This is for your use in testing your implementation.
 		 */
-//		test1();
+		test1();
 		test2();
-
+		test3();
 	}
 
 	public static void test1() {
@@ -57,8 +57,24 @@ public class LinkedListPlayground {
 		L.remove(0);
 		System.out.println(L.size());
 		printList(L);
+		L.clear();
+		printList(L);
 	}
 
+	public static void test3() {
+		LinkedListImpl L = new LinkedListImpl();
+		L.insert(3, 0);printList(L);
+		L.insert(2.0, 1);printList(L);
+		L.insert(1.0, 2);printList(L);
+		L.remove(0);printList(L);
+		L.clear();printList(L);
+		L.insert(3, 0);printList(L);
+		L.insert(2, 1);printList(L);
+		L.insert(1, 0);printList(L);
+		L.remove(2);printList(L);
+
+		System.out.println(L.size());
+	}
 	public static void printList(LinkedListImpl L) {
 		// note that this is a good example of how to iterate through your linked list
 		// since we know how many elements are in the list we can use a for loop
