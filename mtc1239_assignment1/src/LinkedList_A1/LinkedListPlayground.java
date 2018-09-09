@@ -12,7 +12,7 @@ public class LinkedListPlayground {
 		test1();
 		test2();
 		test3();
-	}//
+	}
 
 	public static void test1() {
 		// example test cases
