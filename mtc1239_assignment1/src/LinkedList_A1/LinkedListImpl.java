@@ -63,7 +63,7 @@ public class LinkedListImpl implements LIST_Interface {
 
 	@Override
 	public double get(int index) {
-		if (index > size() - 1) {
+		if (index > size() - 1 || index < 0) {
 			return Double.NaN;
 		} else {
 			Node current = sentinel;
