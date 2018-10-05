@@ -17,50 +17,102 @@ public class BST implements BST_Interface {
 
 	@Override
 	public boolean insert(String s) {
-		// TODO Auto-generated method stub
-		return false;
+		if (empty()) {
+			root = new BST_Node(s);
+			root.parent = null;
+			size++;
+			return true;
+		} else if (contains(s)) {
+			return false;
+		} else {
+			return root.insertNode(s);
+		}
 	}
 
 	@Override
 	public boolean remove(String s) {
-		// TODO Auto-generated method stub
-		return false;
+		if (empty()) {
+			return false;
+		} else if (!contains(s)) {
+			return false;
+		} else if (root.getData().equals(s)) {
+			if (root.getLeft() == null && root.getRight() == null) {
+				root = null;
+				size--;
+				return true;
+			} else if (root.getLeft() != null && root.getRight() == null) {
+				root.getLeft().parent = null;
+				root = root.getLeft();
+				size--;
+				return true;
+			} else if (root.getLeft() == null && root.getRight() != null) {
+				root.getRight().parent = null;
+				root = root.getRight();
+				size--;
+				return true;
+			} else {
+				String tempMax = root.findMax().data;
+				remove(tempMax);
+				root.data = tempMax;
+				size--;
+				return true;
+			}
+		} else {
+			size--;
+			return root.removeNode(s);
+		}
 	}
 
 	@Override
 	public String findMin() {
-		// TODO Auto-generated method stub
-		return null;
+		if (empty()) {
+			return null;
+		} else {
+			return root.findMin().getData();
+		}
 	}
 
 	@Override
 	public String findMax() {
-		// TODO Auto-generated method stub
-		return null;
+		if (empty()) {
+			return null;
+		} else {
+			return root.findMax().getData();
+		}
 	}
 
 	@Override
 	public boolean empty() {
-		// TODO Auto-generated method stub
-		return false;
+		if (size == 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean contains(String s) {
-		// TODO Auto-generated method stub
-		return false;
+		if (empty()) {
+			return false;
+		} else if (root.getData().equals(s)) {
+			return true;
+		} else {
+			return root.containsNode(s);
+		}
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 	@Override
 	public int height() {
-		// TODO Auto-generated method stub
-		return 0;
+		if (empty()) {
+			return -1;
+		} else {
+			return root.getHeight();
+		}
 	}
 
 }

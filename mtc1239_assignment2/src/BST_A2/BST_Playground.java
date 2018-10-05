@@ -27,9 +27,42 @@ public class BST_Playground {
 		// you may wish to print not only the node value, and indicators of what
 		// nodes are the left and right subtree roots,
 		// but also which node is the parent of the current node
-
+		BST tree = new BST();
+		print(tree.empty());
+		tree.insert("A");
+		print(tree.empty());
+		print(tree.size());
+		tree.remove("A");
+		print(tree.empty());
+		print(tree.size());
+		tree.insert("F");
+		printInOrder(tree.getRoot());
+		tree.insert("D");
+		printInOrder(tree.getRoot());
+		tree.insert("E");
+		printInOrder(tree.getRoot());
+		tree.insert("B");
+		printInOrder(tree.getRoot());
+		tree.insert("C");
+		printInOrder(tree.getRoot());
+		tree.insert("A");
+		printInOrder(tree.getRoot());
+		tree.insert("H");
+		printInOrder(tree.getRoot());
 	}
 
+	private static void print(int i) {
+		System.out.println(i);
+		
+	}
+
+	static void print(boolean s) {
+		System.out.println(s);
+	}
+
+	static void print(String s) {
+		System.out.println(s);
+	}
 	static void printLevelOrder(BST tree) {
 		// will print your current tree in Level-Order...
 		// https://en.wikipedia.org/wiki/Tree_traversal

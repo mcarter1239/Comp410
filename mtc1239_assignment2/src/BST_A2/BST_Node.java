@@ -4,6 +4,7 @@ public class BST_Node {
 	String data;
 	BST_Node left;
 	BST_Node right;
+	BST_Node parent;
 
 	BST_Node(String data) {
 		this.data = data;
@@ -41,28 +42,114 @@ public class BST_Node {
 	//
 	// you may use recursive or iterative implementations
 
+	public BST_Node getParent() {
+		return parent;
+	}
+
+	// done
 	public boolean containsNode(String s) {
+		if (getData().compareTo(s) == 0) {
+			return true;
+		} else if (getData().compareTo(s) < 0 && getLeft() != null) {
+			return getLeft().containsNode(s);
+		} else if (getData().compareTo(s) > 0 && getRight() != null) {
+			return getRight().containsNode(s);
+		}
+
 		return false;
 	}
 
+	// done
 	public boolean insertNode(String s) {
-		return false;
+		if (getData().compareTo(s) < 0) {
+			if (getLeft() != null) {
+				return getLeft().insertNode(s);
+			} else {
+				this.left = new BST_Node(s);
+				this.left.parent = this;
+				return true;
+			}
+		} else {
+			if (getRight() != null) {
+				return getRight().insertNode(s);
+			} else {
+				this.right = new BST_Node(s);
+				this.right.parent = this;
+				return true;
+			}
+		}
 	}
 
 	public boolean removeNode(String s) {
+		if (getData().compareTo(s) == 0) {
+			if (getLeft() != null && getRight() == null) {
+				getLeft().parent = this.parent;
+				if(getData().compareTo(parent.getData()) < 0) {
+					parent.left = getLeft();
+				} else if(getData().compareTo(parent.getData()) > 0) {
+					parent.right = getLeft();
+				}
+				return true;
+			} else if (getLeft() == null && getRight() != null) {
+				getRight().parent = this.parent;
+				if(getData().compareTo(parent.getData()) < 0) {
+					parent.left = getRight();
+				} else if(getData().compareTo(parent.getData()) > 0) {
+					parent.right = getRight();
+				}
+				return true;
+			} else if (getLeft() == null && getRight() == null) {
+				if(getData().compareTo(parent.getData()) < 0) {
+					parent.left = null;
+				} else if(getData().compareTo(parent.getData()) > 0) {
+					parent.right = null;
+				}
+				return true;
+			} else if (getLeft() != null && getRight() != null) {
+				String tempData = getLeft().findMax().getData();
+				removeNode(tempData);
+				data = tempData;
+				return true;
+			}
+			
+		} else if (getData().compareTo(s) < 0 && getLeft() != null) {
+			return getLeft().removeNode(s);
+		} else if (getData().compareTo(s) > 0 && getRight() != null) {
+			return getRight().removeNode(s);
+		}
+
 		return false;
 	}
 
+	// done
 	public BST_Node findMin() {
-		return left;
+		if (getLeft() != null) {
+			return getLeft().findMin();
+		} else {
+			return this;
+		}
 	}
 
+	// done
 	public BST_Node findMax() {
-		return right;
+		if (getRight() != null) {
+			return getRight().findMax();
+		} else {
+			return this;
+		}
 	}
 
+	// done
 	public int getHeight() {
-		return 0;
+		if (getRight() != null && getLeft() != null) {
+			return Math.max(getLeft().getHeight(), getRight().getHeight()) + 1;
+		} else if (getRight() != null) {
+			return getRight().getHeight() + 1;
+		} else if (getLeft() != null) {
+			return getLeft().getHeight() + 1;
+		} else {
+			return 0;
+		}
 	}
 
 	// --- end fill in these methods --------------------------------------
