@@ -28,27 +28,34 @@ public class BST_Playground {
 		// nodes are the left and right subtree roots,
 		// but also which node is the parent of the current node
 		BST tree = new BST();
-		print(tree.empty());
+		tree.insert("B");
 		tree.insert("A");
-		print(tree.empty());
-		print(tree.size());
-		tree.remove("A");
-		print(tree.empty());
-		print(tree.size());
-		tree.insert("F");
-		printInOrder(tree.getRoot());
 		tree.insert("D");
-		printInOrder(tree.getRoot());
+		tree.insert("C");
 		tree.insert("E");
 		printInOrder(tree.getRoot());
-		tree.insert("B");
+		print(tree.size());
+		print("");
+		tree.remove("B");
 		printInOrder(tree.getRoot());
-		tree.insert("C");
+		print(tree.size());
+		print("");
+		tree.remove("A");
 		printInOrder(tree.getRoot());
-		tree.insert("A");
+		print(tree.size());
+		print("");
+		tree.remove("D");
 		printInOrder(tree.getRoot());
-		tree.insert("H");
+		print(tree.size());
+		print("");
+		tree.remove("C");
 		printInOrder(tree.getRoot());
+		print(tree.size());
+		print("");
+		tree.remove("E");
+		printInOrder(tree.getRoot());
+		print(tree.size());
+		print("");
 	}
 
 	private static void print(int i) {
@@ -88,7 +95,7 @@ public class BST_Playground {
 		// will print your current tree In-Order
 		if (root != null) {
 			printInOrder(root.getLeft());
-			System.out.print(root.getData() + " ");
+			System.out.println(root.toString());
 			printInOrder(root.getRight());
 		}
 	}

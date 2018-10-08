@@ -18,6 +18,7 @@ public class BST implements BST_Interface {
 	@Override
 	public boolean insert(String s) {
 		if (empty()) {
+//			System.out.println("making a new tree, first node " + s);
 			root = new BST_Node(s);
 			root.parent = null;
 			size++;
@@ -25,6 +26,7 @@ public class BST implements BST_Interface {
 		} else if (contains(s)) {
 			return false;
 		} else {
+			size++;
 			return root.insertNode(s);
 		}
 	}
@@ -38,23 +40,22 @@ public class BST implements BST_Interface {
 		} else if (root.getData().equals(s)) {
 			if (root.getLeft() == null && root.getRight() == null) {
 				root = null;
-				size--;
+				size = 0;
 				return true;
 			} else if (root.getLeft() != null && root.getRight() == null) {
-				root.getLeft().parent = null;
-				root = root.getLeft();
-				size--;
+				String tempData = root.getLeft().findMax().getData();
+				remove(tempData);
+				root.data = tempData;
 				return true;
 			} else if (root.getLeft() == null && root.getRight() != null) {
-				root.getRight().parent = null;
-				root = root.getRight();
-				size--;
+				String tempData = root.getRight().findMin().getData();
+				remove(tempData);
+				root.data = tempData;
 				return true;
 			} else {
-				String tempMax = root.findMax().data;
+				String tempMax = root.getLeft().findMax().data;
 				remove(tempMax);
 				root.data = tempMax;
-				size--;
 				return true;
 			}
 		} else {

@@ -50,9 +50,9 @@ public class BST_Node {
 	public boolean containsNode(String s) {
 		if (getData().compareTo(s) == 0) {
 			return true;
-		} else if (getData().compareTo(s) < 0 && getLeft() != null) {
+		} else if (getData().compareTo(s) > 0 && getLeft() != null) {
 			return getLeft().containsNode(s);
-		} else if (getData().compareTo(s) > 0 && getRight() != null) {
+		} else if (getData().compareTo(s) < 0 && getRight() != null) {
 			return getRight().containsNode(s);
 		}
 
@@ -61,7 +61,7 @@ public class BST_Node {
 
 	// done
 	public boolean insertNode(String s) {
-		if (getData().compareTo(s) < 0) {
+		if (getData().compareTo(s) > 0) {
 			if (getLeft() != null) {
 				return getLeft().insertNode(s);
 			} else {
@@ -84,24 +84,24 @@ public class BST_Node {
 		if (getData().compareTo(s) == 0) {
 			if (getLeft() != null && getRight() == null) {
 				getLeft().parent = this.parent;
-				if(getData().compareTo(parent.getData()) < 0) {
+				if (getData().compareTo(parent.getData()) < 0) {
 					parent.left = getLeft();
-				} else if(getData().compareTo(parent.getData()) > 0) {
+				} else if (getData().compareTo(parent.getData()) > 0) {
 					parent.right = getLeft();
 				}
 				return true;
 			} else if (getLeft() == null && getRight() != null) {
 				getRight().parent = this.parent;
-				if(getData().compareTo(parent.getData()) < 0) {
+				if (getData().compareTo(parent.getData()) < 0) {
 					parent.left = getRight();
-				} else if(getData().compareTo(parent.getData()) > 0) {
+				} else if (getData().compareTo(parent.getData()) > 0) {
 					parent.right = getRight();
 				}
 				return true;
 			} else if (getLeft() == null && getRight() == null) {
-				if(getData().compareTo(parent.getData()) < 0) {
+				if (getData().compareTo(parent.getData()) < 0) {
 					parent.left = null;
-				} else if(getData().compareTo(parent.getData()) > 0) {
+				} else if (getData().compareTo(parent.getData()) > 0) {
 					parent.right = null;
 				}
 				return true;
@@ -111,10 +111,10 @@ public class BST_Node {
 				data = tempData;
 				return true;
 			}
-			
-		} else if (getData().compareTo(s) < 0 && getLeft() != null) {
+
+		} else if (getData().compareTo(s) > 0 && getLeft() != null) {
 			return getLeft().removeNode(s);
-		} else if (getData().compareTo(s) > 0 && getRight() != null) {
+		} else if (getData().compareTo(s) < 0 && getRight() != null) {
 			return getRight().removeNode(s);
 		}
 
@@ -159,7 +159,8 @@ public class BST_Node {
 	// --------------------------------------------------------------------
 
 	public String toString() {
-		return "Data: " + this.data + ", Left: " + ((this.left != null) ? left.data : "null") + ",Right: "
-				+ ((this.right != null) ? right.data : "null");
+		return "Data: " + this.data + ", Left: " + ((this.left != null) ? left.data : "null") + ", Right: "
+				+ ((this.right != null) ? right.data : "null") + ", Parent: "
+						+ ((this.parent != null) ? parent.data : "null");
 	}
 }
