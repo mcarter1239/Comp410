@@ -96,7 +96,7 @@ public class MinBinHeap implements Heap_Interface {
 		for (int i = 0; i < entries.length; i++) {
 			array[i + 1] = entries[i];
 		}
-		this.last = entries.length - 1;
+		this.last = entries.length;
 		int sn = this.PN(last);
 		for (int k = sn; k > 0; k--) {
 			EntryPair temp = null;
