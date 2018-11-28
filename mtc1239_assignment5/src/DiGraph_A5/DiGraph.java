@@ -104,8 +104,7 @@ public class DiGraph implements DiGraphInterface {
 	@Override
 	public ShortestPathInfo[] shortestPath(String startLabel) {
 		Node start = nodes.get(startLabel);
-
-		PriorityQueue<Node> nodeQueue = new PriorityQueue();
+		PriorityQueue<Node> nodeQueue = new PriorityQueue<Node>(numNodes, new NodeComparator());
 
 		Iterator<Map.Entry<String, Node>> iterator = this.nodes.entrySet().iterator();
 		Node n;
@@ -147,7 +146,8 @@ public class DiGraph implements DiGraphInterface {
 						nodes.get((edgeArray[i].dLabel)).distance = pathLength;
 
 						nodeQueue.add(nodes.get((edgeArray[i].dLabel)));
-						info[(int) nodes.get((edgeArray[i].dLabel)).num] = new ShortestPathInfo(nodes.get((edgeArray[i].dLabel)).label, pathLength);
+						info[(int) nodes.get((edgeArray[i].dLabel)).num] = new ShortestPathInfo(
+								nodes.get((edgeArray[i].dLabel)).label, pathLength);
 					}
 
 				} else {
@@ -157,22 +157,24 @@ public class DiGraph implements DiGraphInterface {
 
 						nodes.get((edgeArray[i].dLabel)).distance = pathLength;
 
-						info[(int) nodes.get((edgeArray[i].dLabel)).num] = new ShortestPathInfo(nodes.get((edgeArray[i].dLabel)).label, pathLength);
+						info[(int) nodes.get((edgeArray[i].dLabel)).num] = new ShortestPathInfo(
+								nodes.get((edgeArray[i].dLabel)).label, pathLength);
 					}
 
 				}
 
 			}
-			
-			iterator = this.nodes.entrySet().iterator();
-			while (iterator.hasNext()) {
-				n = iterator.next().getValue();
-				if (!n.done) {
-					n.done = true;
-					info[(int) n.num] = new ShortestPathInfo(n.label, -1);
-				}
-			}
 
+			
+
+		}
+		iterator = this.nodes.entrySet().iterator();
+		while (iterator.hasNext()) {
+			n = iterator.next().getValue();
+			if (!n.done) {
+				n.done = true;
+				info[(int) n.num] = new ShortestPathInfo(n.label, -1);
+			}
 		}
 		return info;
 	}

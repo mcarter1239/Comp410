@@ -62,6 +62,7 @@ public class Node {
 	public void removeLoop() {
 		loop = null;
 	}
+
 	public int numOutEdges() {
 		int counter = 0;
 		Iterator<Map.Entry<String, Edge>> entries = outEdges.entrySet().iterator();
@@ -69,19 +70,20 @@ public class Node {
 			entries.next();
 			counter++;
 		}
-		
+
 		return counter;
 	}
+
 	public Edge[] getOutEdges() {
 		int counter = 0;
 		Edge[] output = new Edge[numOutEdges()];
-		
+
 		Iterator<Map.Entry<String, Edge>> entries = outEdges.entrySet().iterator();
 		while (entries.hasNext()) {
 			Entry<String, Edge> entry = entries.next();
 			output[counter] = entry.getValue();
 			counter++;
 		}
-		return output;	
+		return output;
 	}
 }

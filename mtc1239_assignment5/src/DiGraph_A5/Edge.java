@@ -7,7 +7,7 @@ public class Edge {
 	String dLabel;
 	long weight;
 	String eLabel;
-	
+
 	public Edge(long idNum, String sLabel, String dLabel, long weight, String eLabel) {
 		this.idNum = idNum;
 		this.sLabel = sLabel;
