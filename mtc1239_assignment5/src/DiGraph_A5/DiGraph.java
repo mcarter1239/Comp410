@@ -101,5 +101,11 @@ public class DiGraph implements DiGraphInterface {
 		return edges.size();
 	}
 
+	@Override
+	public ShortestPathInfo[] shortestPath(String label) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	// rest of your code to implement the various operations
 }
